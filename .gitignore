@@ -416,3 +416,22 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Visual Studio files
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Build output
+Debug/
+x64/
+
+# Game assets (if you don’t want them in repo)
+font/
+graphics/
+sound/
+
+# DLLs
+*.dll
