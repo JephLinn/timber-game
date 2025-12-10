@@ -9,6 +9,17 @@
 // Make code easier to type with "using namespace"
 using namespace sf;
 
+// Function declarations
+void udpateBranches(int seed);
+
+const int NUM_BRANCHES = 6;
+Sprite spriteBranches[NUM_BRANCHES];
+
+//Where is the player/branch? Left or right
+//Left of Right
+enum class side { LEFT, RIGHT, NONE };
+side branchPositions[NUM_BRANCHES];
+
 int main()
 {
 
