@@ -174,10 +174,6 @@ int main()
 		branches[i].setOrigin({ 220, 20 });
 	}
 
-	updateBranches(1);
-	updateBranches(2);
-	updateBranches(3);
-	updateBranches(4);
 
 	while (window.isOpen())
 	{
@@ -387,7 +383,7 @@ int main()
 				else if (branchPositions[i] == side::RIGHT)
 				{
 					//Move the sprite to the right side
-					branches[i].setPosition({ 610, height });
+					branches[i].setPosition({ 1300, height });
 
 					//Set the sprite rotation to normal
 					branches[i].setRotation(degrees(0));
