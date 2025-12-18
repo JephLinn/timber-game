@@ -215,6 +215,22 @@ int main()
 		Handle the player input
 		*/
 
+		Event event;
+
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::KeyReleased && !paused)
+			{
+				//listen for key presses again
+				acceptInput = true;
+
+				//hide the axe
+				spriteAxe.setPosition({ 2000, spriteAxe.getPosition().y });
+			}
+		}
+
+
+
 		if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
 		{
 			window.close();
@@ -242,6 +258,60 @@ int main()
 			spritePlayer.setPosition({ 580, 720 });
 
 			acceptInput = true;
+		}
+
+		//Wrap the player controls to
+		//Make sure we are accepting input
+		if (acceptInput && !paused)
+		{
+			//Left key pressed
+			if (Keyboard::isKeyPressed(Keyboard::Key::Left))
+			{
+				//Make sure the player is on the left side
+				playerSide = side::LEFT;
+				score++;
+				//Add time to the timer
+				timeRemaining += (2 / score) + .15f;
+				if (timeRemaining > 6.0f)
+				{
+					timeRemaining = 6.0f;
+				}
+				//Move the axe
+				spriteAxe.setPosition({ AXE_POSITION_LEFT, spriteAxe.getPosition().y });
+				//Move the player to the left side
+				spritePlayer.setPosition({ 580, 720 });
+				//Update the branches
+				updateBranches(score);
+				//Set the log flying to the right
+				spriteLog.setPosition({ 810, 720 });
+				logSpeedX = -5000;
+				logActive = true;
+				acceptInput = false;
+			}
+			//Right key pressed
+			if (Keyboard::isKeyPressed(Keyboard::Key::Right))
+			{
+				//Make sure the player is on the right side
+				playerSide = side::RIGHT;
+				score++;
+				//Add time to the timer
+				timeRemaining += (2 / score) + .15f;
+				if (timeRemaining > 6.0f)
+				{
+					timeRemaining = 6.0f;
+				}
+				//Move the axe
+				spriteAxe.setPosition({ AXE_POSITION_RIGHT, spriteAxe.getPosition().y });
+				//Move the player to the right side
+				spritePlayer.setPosition({ 1200, 720 });
+				//Update the branches
+				updateBranches(score);
+				//Set the log flying to the left
+				spriteLog.setPosition({ 810, 720 });
+				logSpeedX = 5000;
+				logActive = true;
+				acceptInput = false;
+			}
 		}
 
 		/*
