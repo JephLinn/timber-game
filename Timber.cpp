@@ -215,19 +215,21 @@ int main()
 		Handle the player input
 		*/
 
-		Event event;
-
-		while (window.pollEvent(event))
+		while (const std::optional event = window.pollEvent())
 		{
-			if (event.type == Event::KeyReleased && !paused)
+			// Check for KeyReleased event
+			if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
 			{
-				//listen for key presses again
-				acceptInput = true;
+				if (!paused)
+				{
+					acceptInput = true;
 
-				//hide the axe
-				spriteAxe.setPosition({ 2000, spriteAxe.getPosition().y });
+					// Hide the axe
+					spriteAxe.setPosition(Vector2f(2000.f, spriteAxe.getPosition().y));
+				}
 			}
 		}
+
 
 
 
