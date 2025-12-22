@@ -535,6 +535,26 @@ int main()
 				}
 			}
 
+			// Has the player been squished by a branch?
+			if (branchPositions[5] == playerSide)
+			{
+				//Death
+				paused = true;
+				acceptInput = false;
+				//Show the gravestone
+				spriteRIP.setPosition({ 525, 760 });
+				//Hide the player
+				spritePlayer.setPosition({ 2000, 660 });
+				//Change the message text
+				messageText.setString("SQUISHED!!\nPress Enter to restart!");
+				//Reposition the message
+				/*FloatRect textRect = messageText.getLocalBounds();
+				messageText.setOrigin(
+					textRect.left + textRect.width / 2.0f,
+					textRect.top + textRect.height / 2.0f);
+				messageText.setPosition({ 1920 / 2.0f, 1080 / 2.0f });*/
+			}
+
 		} //End if(!paused)
 
 		/*
