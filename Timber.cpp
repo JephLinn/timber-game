@@ -5,6 +5,7 @@
 // Incluce important libraries here
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 
 // Make code easier to type with "using namespace"
@@ -131,7 +132,7 @@ int main()
 
 	//We need to load a font
 	Font font("font/KOMIKAP_.ttf");
-	
+
 	//Draw some text
 	int score = 0;
 	Text messageText(font);
@@ -208,6 +209,17 @@ int main()
 
 	//Control the player input
 	bool acceptInput = false;
+
+	//Prepare the sound
+	SoundBuffer chopBuffer("sound/chop.wav");
+	Sound chop(chopBuffer);
+	
+	SoundBuffer deathBuffer("sound/death.wav");
+	Sound death(deathBuffer);
+
+	//Out of time
+	SoundBuffer ootBuffer("sound/out_of_time.wav");
+	Sound outOfTime(ootBuffer);
 
 	while (window.isOpen())
 	{
@@ -289,6 +301,9 @@ int main()
 				logSpeedX = -5000;
 				logActive = true;
 				acceptInput = false;
+
+				//play a chop sound
+				chop.play();
 			}
 			//Right key pressed
 			if (Keyboard::isKeyPressed(Keyboard::Key::Right))
@@ -313,6 +328,9 @@ int main()
 				logSpeedX = 5000;
 				logActive = true;
 				acceptInput = false;
+
+				//play a chop sound
+				chop.play();
 			}
 		}
 
@@ -344,6 +362,9 @@ int main()
 					textRect.left + textRect.width / 2.0f,
 					textRect.top + textRect.height / 2.0f);
 				messageText.setPosition({ 1920 / 2.0f, 1080 / 2.0f });*/
+
+				// Play the out of time sound
+				outOfTime.play();
 			}
 
 			//Setup the bee
@@ -553,6 +574,9 @@ int main()
 					textRect.left + textRect.width / 2.0f,
 					textRect.top + textRect.height / 2.0f);
 				messageText.setPosition({ 1920 / 2.0f, 1080 / 2.0f });*/
+
+				//Play the death sound
+				death.play();
 			}
 
 		} //End if(!paused)
